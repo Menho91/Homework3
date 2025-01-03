@@ -23,7 +23,7 @@ public:
 	{
 		data = new T[capacity];    // 배열 동적 할당
 	}
-	SimpleVector(const SimpleVector& other) : currentSize(other.size()), currentCapacity(other.capacity())
+	SimpleVector(SimpleVector& other) : currentSize(other.size()), currentCapacity(other.capacity())
 	{
 		data = new T[other.capacity()];
 		for (int i = 0; i < other.size(); i++)
@@ -81,10 +81,13 @@ int main()
 	sv.pop_back();
 	sv.printVector();
 
-	sv.push_back(40);
-	sv.push_back(50);
-	sv.printVector();
-	sv.pop_back();
+	SimpleVector<int> sv_copy(sv);
+	sv_copy.printVector();
+
+	sv_copy.push_back(40);
+	sv_copy.push_back(50);
+	sv_copy.printVector();
+
 	sv.printVector();
 	return 0;
 }
