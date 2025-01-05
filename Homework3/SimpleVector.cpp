@@ -23,10 +23,10 @@ public:
 	{
 		data = new T[capacity];    // 배열 동적 할당
 	}
-	SimpleVector(SimpleVector& other) : currentSize(other.size()), currentCapacity(other.capacity())
+	SimpleVector(const SimpleVector& other) : currentSize(other.currentSize), currentCapacity(other.currentCapacity)
 	{
 		data = new T[other.capacity()];
-		for (int i = 0; i < other.size(); i++)
+		for (int i = 0; i < currentSize; i++)
 		{
 			data[i] = other.data[i];
 		}
@@ -54,16 +54,16 @@ public:
 	}
 	void pop_back()  // 벡터의 마지막 원소 제거
 	{
-		if (currentSize != 0)
+		if (currentSize > 0)
 		{
 			currentSize--;
 		}
 	}
-	int size() { return currentSize; }
-	int capacity() { return currentCapacity; }
+	int size() const { return currentSize; }
+	int capacity() const { return currentCapacity; }
 	void sortData()
 	{
-		data.sort();
+		data.sort(data, data + currentSize);
 	}
 	~SimpleVector()
 	{
